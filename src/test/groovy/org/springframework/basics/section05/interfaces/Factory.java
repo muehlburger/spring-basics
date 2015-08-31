@@ -1,4 +1,4 @@
-package org.springframework.basics.section05;
+package org.springframework.basics.section05.interfaces;
 
 import org.springframework.stereotype.Component;
 

@@ -1,5 +1,9 @@
 package org.springframework.basics.section05
 
+import org.springframework.basics.section05.interfaces.IComponent
+import org.springframework.basics.section05.interfaces.IFactory
+import org.springframework.basics.section05.interfaces.IRepository
+import org.springframework.basics.section05.interfaces.IService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.ApplicationContext
 import org.springframework.context.annotation.ComponentScan
