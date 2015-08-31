@@ -1,4 +1,4 @@
-package org.springframework.basics.section02
+package org.springframework.basics.sectionxy
 
 import org.springframework.test.context.TestContext
 import org.springframework.test.context.TestExecutionListener

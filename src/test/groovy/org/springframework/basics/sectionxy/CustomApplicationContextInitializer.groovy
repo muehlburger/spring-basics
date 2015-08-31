@@ -1,4 +1,4 @@
-package org.springframework.basics.section02
+package org.springframework.basics.sectionxy
 
 import org.springframework.context.ApplicationContextInitializer
 import org.springframework.context.support.GenericApplicationContext

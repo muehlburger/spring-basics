@@ -12,24 +12,12 @@ import spock.lang.Specification
 
 import static org.springframework.test.context.TestExecutionListeners.MergeMode.MERGE_WITH_DEFAULTS
 
-@ContextConfiguration(classes = TestConfiguration, initializers = CustomApplicationContextInitializer)
-//@TestExecutionListeners(value = [DependencyInjectionTestExecutionListener,
-//        TransactionalTestExecutionListener,
-//        DirtiesContextTestExecutionListener],
-//        mergeMode = REPLACE_DEFAULTS)
-@TestExecutionListeners(value = [CustomTestExecutionListener], mergeMode = MERGE_WITH_DEFAULTS)
-//@ContextHierarchy([
-//        @ContextConfiguration(locations = "classpath:context1.xml"),
-//        @ContextConfiguration(locations = "classpath:context2.xml")
-//])
-//@ActiveProfiles("profileA")
-class TestFrameworkShowcase extends Specification {
+@ContextConfiguration(classes = TestConfiguration)
+class SimpleTestFramework extends Specification {
 
     @Autowired
     private ApplicationContext applicationContext
 
-    // @DirtiesContext
-    // @Transactional
     def "application context must not be null"() {
         expect:
             applicationContext != null
@@ -37,7 +25,6 @@ class TestFrameworkShowcase extends Specification {
 
     @Configuration
     public static class TestConfiguration {
-        // create a default context
     }
 
 }
