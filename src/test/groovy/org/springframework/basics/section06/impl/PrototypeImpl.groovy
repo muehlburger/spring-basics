@@ -6,7 +6,8 @@ class PrototypeImpl implements PrototypeClass {
 
     String state = UUID.randomUUID().toString()
 
-    String getState() {
+    @Override
+    public String getState() {
         return state
     }
 

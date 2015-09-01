@@ -9,6 +9,7 @@ class SingletonImpl implements SingletonClass {
     @Autowired
     private PrototypeClass prototype;
 
+    @Override
     public String getStuffFromPrototype() {
         prototype.state
     }
