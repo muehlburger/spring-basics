@@ -26,7 +26,7 @@ class ClassPathScanTest extends Specification {
     }
 
     @Configuration
-    @ComponentScan("org.springframework.basics.section08")
+    @ComponentScan("org.springframework.basics.section07")
     public static class TestConfiguration {
 
     }
