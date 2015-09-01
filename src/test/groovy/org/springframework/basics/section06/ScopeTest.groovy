@@ -20,7 +20,7 @@ class ScopeTest extends Specification  {
     @Autowired
     private SingletonClass singleton
 
-    def "profile test"() {
+    def "scope test"() {
         expect:
            singleton.getStuffFromPrototype() != singleton.getStuffFromPrototype()
     }

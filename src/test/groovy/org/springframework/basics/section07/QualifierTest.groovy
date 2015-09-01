@@ -20,7 +20,7 @@ class QualifierTest extends Specification  {
     @Autowired
     private SomeInterface beanB
 
-    def "profile test"() {
+    def "qualifier test"() {
         expect:
             someBean.stuff != null
             someBean.stuff == "BeanA"
