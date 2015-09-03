@@ -17,7 +17,6 @@ import spock.lang.Specification
 @ContextConfiguration(classes = TestConfiguration)
 class PostProcessorTest extends Specification {
 
-    @Autowired
     private IRepository repository
 
     def "@ComponentScan test"() {
@@ -26,7 +25,6 @@ class PostProcessorTest extends Specification {
     }
 
     @Configuration
-    @ComponentScan("org.springframework.basics.section06")
     public static class TestConfiguration {
 
         @Bean
@@ -34,24 +32,17 @@ class PostProcessorTest extends Specification {
             new Processor();
         }
 
+        // TODO register Repository into context
+
     }
 
-    public static class Processor implements BeanPostProcessor {
+    // TODO implement a BeanPostProcessor
+    // HINT use Mockito to mock a bean
+    public static class Processor {
 
-        @Override
-        Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-
-            if (AnnotationUtils.findAnnotation(bean.class, Repository)) {
-                return Mockito.mock(bean.class)
-            }
-
-            return bean
-        }
-
-        @Override
-        Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-            bean
-        }
     }
 
+    private static boolean isRepositoryBean(bean) {
+        return bean instanceof IRepository;
+    }
 }

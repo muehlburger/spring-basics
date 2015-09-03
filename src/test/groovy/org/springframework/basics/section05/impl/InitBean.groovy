@@ -5,18 +5,18 @@ import org.springframework.beans.factory.InitializingBean
 
 import javax.annotation.PostConstruct
 
-class InitBean implements InitializingBean {
+// TODO implement an initializing bean
+class InitBean {
 
     String afterPropertiesSet
     String postConstructed
 
-    @Override
     void afterPropertiesSet() throws Exception {
         println "afterPropertiesSet called"
         afterPropertiesSet = "value"
     }
 
-    @PostConstruct
+    // TODO register hook for PostConstruction
     void setPostConstructed() {
         println "PostConstruct called"
         this.postConstructed = "postConstructed"

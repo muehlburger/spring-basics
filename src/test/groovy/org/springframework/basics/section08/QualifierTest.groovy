@@ -13,35 +13,27 @@ import spock.lang.Specification
 @ContextConfiguration(classes=TestConfiguration)
 class QualifierTest extends Specification  {
 
-    @Autowired
-    @Qualifier("beanA")
+    // TODO autowire the correct bean
     private SomeInterface someBean
 
-    @Autowired
-    private SomeInterface beanB
+    // TODO autowire the correct bean
+    private SomeInterface someOtherBean
 
     def "qualifier test"() {
         expect:
             someBean.stuff != null
             someBean.stuff == "BeanA"
+            someBean instanceof BeanA
 
-            beanB.stuff != null
-            beanB.stuff == "BeanB"
+            someOtherBean.stuff != null
+            someOtherBean.stuff == "BeanB"
+            someOtherBean instanceof BeanB
     }
+
+    // TODO register beans
 
     @Configuration
     public static class TestConfiguration {
-
-        @Bean
-        public SomeInterface beanA() {
-            return new BeanA()
-        }
-
-        @Bean
-        public SomeInterface beanB() {
-            return new BeanB()
-        }
-
 
     }
 }

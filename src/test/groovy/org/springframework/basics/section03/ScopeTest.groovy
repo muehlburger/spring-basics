@@ -24,18 +24,16 @@ class ScopeTest extends Specification  {
            singleton.getStuffFromPrototype() != singleton.getStuffFromPrototype()
     }
 
-    @Configuration
+    // TODO mark class as configuration class
     public static class TestConfiguration {
 
-        @Bean
-        @Scope(scopeName=ConfigurableBeanFactory.SCOPE_SINGLETON)
+        // TODO "register" bean into Context
         public SingletonClass singletonBean() {
             return new SingletonImpl()
         }
 
-        @Bean
-        @Scope(proxyMode = ScopedProxyMode.INTERFACES, scopeName = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-        //@Scope(scopeName = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+        // TODO "register" bean into Context
+        // TODO set the correct scope
         public PrototypeClass prototypeBean() {
             return new PrototypeImpl()
         }

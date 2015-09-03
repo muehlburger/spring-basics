@@ -4,13 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.ApplicationContext
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.context.annotation.Profile
-import org.springframework.test.context.ActiveProfiles
+import org.springframework.context.annotation.Import
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Specification
 
 @ContextConfiguration(classes=TestConfiguration)
-@ActiveProfiles("profileA")
+// TODO activate correct profile
 class ProfileTest extends Specification {
 
     @Autowired
@@ -19,19 +18,25 @@ class ProfileTest extends Specification {
     def "profile test"() {
         expect:
             def text = applicationContext.getBean("text")
-            println text
+            text == "B"
     }
 
     @Configuration
+    @Import(TestConfigurationB)
     public static class TestConfiguration {
 
-        @Profile("profileA")
+//        @Profile("default")
         @Bean(name = "text")
         public String textA() {
             return "A"
         }
 
-        @Profile("profileB")
+    }
+
+    @Configuration
+    public static class TestConfigurationB {
+
+        // TODO set correct profile
         @Bean(name = "text")
         public String textB() {
             return "B"

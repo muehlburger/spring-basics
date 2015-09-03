@@ -58,7 +58,7 @@ class CustomScopeTest extends Specification {
         }
 
         @Bean
-        @Scope("thread")
+        // TODO Set correct scope for the bean
         public BeanA dateFormat() {
             return new BeanA()
         }

@@ -4,42 +4,48 @@ import org.springframework.basics.section05.impl.DestroyerBean
 import org.springframework.basics.section05.impl.InitBean
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor
+import org.springframework.context.ApplicationContext
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.support.StaticApplicationContext
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Specification
 
-@ContextConfiguration(classes=TestConfiguration)
-class BeanLifecycleTest extends Specification  {
+import javax.annotation.PostConstruct
+import javax.annotation.PreDestroy
 
-    @Autowired
-    private InitBean initBean
-
-    @Autowired
-    private DestroyerBean destroyerBean
+class BeanLifecycleTest extends Specification {
 
     def "bean lifecycle test"() {
         expect:
+
+            def context = new StaticApplicationContext()
+            someSpringStuff(context)
+
+            def initBean = context.getBean(InitBean.class)
+            def disposableBean = context.getBean(DestroyerBean.class)
+
             initBean.postConstructed != null
             initBean.afterPropertiesSet != null
 
-//            destroyerBean.preDestroyed != null
-//            destroyerBean.destroyed != null
+            context.close()
+
+            disposableBean.preDestroyed != null
+            disposableBean.destroyed != null
     }
 
-    @Configuration
-    public static class TestConfiguration {
+    private static void someSpringStuff(StaticApplicationContext context) {
+        def bpp = new InitDestroyAnnotationBeanPostProcessor()
+        bpp.setInitAnnotationType(PostConstruct)
+        bpp.setDestroyAnnotationType(PreDestroy)
 
-        @Bean
-        public InitBean initBean() {
-            return new InitBean()
-        }
+        context.beanFactory.registerSingleton("BPP", bpp)
+        context.registerSingleton("initBean", InitBean.class)
+        context.registerSingleton("destroyerBean", DestroyerBean.class)
 
-        @Bean
-        public DestroyerBean destroyerBean() {
-            return new DestroyerBean()
-        }
-
-
+        context.refresh()
     }
+
+
 }

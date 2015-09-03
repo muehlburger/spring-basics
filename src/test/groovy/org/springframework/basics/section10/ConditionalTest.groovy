@@ -16,38 +16,40 @@ class ConditionalTest extends Specification {
     def "@Conditional showcase"() {
         expect:
             def text = applicationContext.getBean("text")
-            println text
+            text == "B"
     }
 
     @Configuration
+    @Import(TestConfigurationB)
     private static class TestConfiguration {
 
         @Bean(name = "text")
-        @Conditional(FalseCondition)
+        // TODO set condition to not register bean
         public String textA() {
             return "A"
         }
 
+    }
+
+    @Configuration
+    private static class TestConfigurationB {
+
         @Bean(name = "text")
-        @Conditional(TrueCondition)
+        // TODO set condition to register bean
         public String textB() {
             return "B"
         }
 
     }
 
-    private static class TrueCondition implements Condition {
-        @Override
-        boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
-            return true
-        }
+    // TODO implement Condition
+    private static class TrueCondition {
+
     }
 
-    private static class FalseCondition implements Condition {
-        @Override
-        boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
-            return false
-        }
+    // TODO implement Condition
+    private static class FalseCondition {
+
     }
 
 }
