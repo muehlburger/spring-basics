@@ -29,6 +29,9 @@ class BeanLifecycleTest extends Specification {
             initBean.postConstructed != null
             initBean.afterPropertiesSet != null
 
+            disposableBean.preDestroyed == null
+            disposableBean.destroyed == null
+
             context.close()
 
             disposableBean.preDestroyed != null
