@@ -1,9 +1,6 @@
 package org.springframework.basics.section07
 
-import org.springframework.basics.section07.interfaces.IComponent
-import org.springframework.basics.section07.interfaces.IFactory
-import org.springframework.basics.section07.interfaces.IRepository
-import org.springframework.basics.section07.interfaces.IService
+import org.springframework.basics.section07.interfaces.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.ApplicationContext
 import org.springframework.context.annotation.ComponentScan
@@ -13,7 +10,6 @@ import org.springframework.stereotype.Component
 import org.springframework.stereotype.Repository
 import org.springframework.stereotype.Service
 import org.springframework.test.context.ContextConfiguration
-import org.springframework.basics.section07.interfaces.Factory
 import spock.lang.Specification
 
 @ContextConfiguration(classes = TestConfiguration)
@@ -42,8 +38,7 @@ class ClassPathScanTest extends Specification {
     }
 
     @Configuration
-    // TODO scan "org.springframework.basics.section07" for Spring Beans
-    // TODO annotate Beans correctly
+    @ComponentScan("org.springframework.basics.section07")
     public static class TestConfiguration {
 
     }

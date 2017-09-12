@@ -6,6 +6,7 @@ import org.springframework.basics.section08.interfaces.SomeInterface
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Specification
@@ -13,10 +14,13 @@ import spock.lang.Specification
 @ContextConfiguration(classes=TestConfiguration)
 class QualifierTest extends Specification  {
 
-    // TODO autowire the correct bean
+    @Autowired
+    @Qualifier("first")
     private SomeInterface someBean
 
     // TODO autowire the correct bean
+    @Autowired
+    @Qualifier("second")
     private SomeInterface someOtherBean
 
     def "qualifier test"() {
@@ -30,9 +34,8 @@ class QualifierTest extends Specification  {
             someOtherBean instanceof BeanB
     }
 
-    // TODO register beans
-
     @Configuration
+    @ComponentScan
     public static class TestConfiguration {
 
     }
