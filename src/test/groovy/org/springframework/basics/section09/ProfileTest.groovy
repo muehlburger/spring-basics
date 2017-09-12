@@ -5,11 +5,13 @@ import org.springframework.context.ApplicationContext
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Import
+import org.springframework.context.annotation.Profile
+import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Specification
 
 @ContextConfiguration(classes=TestConfiguration)
-// TODO activate correct profile
+@ActiveProfiles("B")
 class ProfileTest extends Specification {
 
     @Autowired
@@ -25,7 +27,7 @@ class ProfileTest extends Specification {
     @Import(TestConfigurationB)
     public static class TestConfiguration {
 
-//        @Profile("default")
+        @Profile("default")
         @Bean(name = "text")
         public String textA() {
             return "A"
@@ -37,6 +39,7 @@ class ProfileTest extends Specification {
     public static class TestConfigurationB {
 
         // TODO set correct profile
+        @Profile("B")
         @Bean(name = "text")
         public String textB() {
             return "B"

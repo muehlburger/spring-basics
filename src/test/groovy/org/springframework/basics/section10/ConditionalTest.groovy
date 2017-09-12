@@ -25,6 +25,7 @@ class ConditionalTest extends Specification {
 
         @Bean(name = "text")
         // TODO set condition to not register bean
+        @Conditional(FalseCondition)
         public String textA() {
             return "A"
         }
@@ -35,21 +36,26 @@ class ConditionalTest extends Specification {
     private static class TestConfigurationB {
 
         @Bean(name = "text")
-        // TODO set condition to register bean
+        @Conditional(TrueCondition)
         public String textB() {
             return "B"
         }
 
     }
 
-    // TODO implement Condition
-    private static class TrueCondition {
+    private static class TrueCondition implements Condition{
 
+        @Override
+        boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
+            return true
+        }
     }
 
-    // TODO implement Condition
-    private static class FalseCondition {
-
+    private static class FalseCondition implements Condition {
+        @Override
+        boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
+            return false
+        }
     }
 
 }
