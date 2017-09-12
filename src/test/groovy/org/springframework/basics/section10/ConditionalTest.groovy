@@ -24,7 +24,6 @@ class ConditionalTest extends Specification {
     private static class TestConfiguration {
 
         @Bean(name = "text")
-        // TODO set condition to not register bean
         @Conditional(FalseCondition)
         public String textA() {
             return "A"
