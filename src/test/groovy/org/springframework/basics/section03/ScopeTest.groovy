@@ -5,6 +5,7 @@ import org.springframework.basics.section03.impl.SingletonImpl
 import org.springframework.basics.section03.interfaces.PrototypeClass
 import org.springframework.basics.section03.interfaces.SingletonClass
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Configurable
 import org.springframework.beans.factory.config.ConfigurableBeanFactory
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -24,16 +25,16 @@ class ScopeTest extends Specification  {
            singleton.getStuffFromPrototype() != singleton.getStuffFromPrototype()
     }
 
-    // TODO mark class as configuration class
+    @Configuration
     public static class TestConfiguration {
 
-        // TODO "register" bean into Context
+        @Bean
         public SingletonClass singletonBean() {
             return new SingletonImpl()
         }
 
-        // TODO "register" bean into Context
-        // TODO set the correct scope
+        @Bean
+        @Scope(value = "prototype", proxyMode = ScopedProxyMode.TARGET_CLASS)
         public PrototypeClass prototypeBean() {
             return new PrototypeImpl()
         }
