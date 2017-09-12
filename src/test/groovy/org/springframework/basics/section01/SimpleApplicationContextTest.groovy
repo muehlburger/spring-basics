@@ -8,7 +8,7 @@ class SimpleApplicationContextTest extends Specification {
     def "test a simple application context"() {
         expect:
             def context = new StaticApplicationContext()
-            // TODO register bean
+            context.registerSingleton("serviceA" , ServiceA.class)
             context.getBean(ServiceA) != null
             context.getBean("serviceA") != null
     }

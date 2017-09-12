@@ -12,9 +12,8 @@ class ParentApplicationContextTest extends Specification {
 
             def child = new StaticApplicationContext()
             child.registerSingleton("serviceB", ServiceB)
-
-            // TODO set parent context
-
+        
+            child.setParent(parent)
             child.getBean(ServiceA) != null
             child.getBean(ServiceB) != null
 
