@@ -6,8 +6,7 @@ import org.springframework.beans.factory.DisposableBean
 import javax.annotation.PreDestroy
 
 
-// TODO implement a disposable bean
-class DestroyerBean {
+class DestroyerBean implements DisposableBean {
 
     String destroyed
     String preDestroyed
@@ -17,7 +16,7 @@ class DestroyerBean {
         destroyed = "destroyed"
     }
 
-    // TODO register hook for pre destruction
+    @PreDestroy
     void setPreDestroyed() {
         println "PreDestroy called"
         this.preDestroyed = "preDestroyed"

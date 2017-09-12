@@ -5,8 +5,7 @@ import org.springframework.beans.factory.InitializingBean
 
 import javax.annotation.PostConstruct
 
-// TODO implement an initializing bean
-class InitBean {
+class InitBean implements InitializingBean {
 
     String afterPropertiesSet
     String postConstructed
@@ -16,10 +15,10 @@ class InitBean {
         afterPropertiesSet = "value"
     }
 
-    // TODO register hook for PostConstruction
+    @PostConstruct
     void setPostConstructed() {
         println "PostConstruct called"
-        this.postConstructed = "postConstructed"
+        this.postConstructed = "value"
     }
 
 
